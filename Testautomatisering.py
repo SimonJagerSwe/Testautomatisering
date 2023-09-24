@@ -4,8 +4,17 @@ import pytest
 from selenium.webdriver.support.wait import WebDriverWait
 from helper_tests import simple_assert, boolean_assert
 
+driver = webdriver.Chrome()
+MAIN_URL = ('https://www.malmomusikaffar.com/')
 
+driver.get(MAIN_URL)
 
-driver = webdriver.Chrome()  # Optional argument, if not specified will search path.
+# SETUP & TEARDOWN
+@pytest.fixture
+def load_driver():
 
-driver.get('http://www.google.com/')
+    driver = webdriver.Chrome()
+
+    yield driver
+
+    driver.quit()

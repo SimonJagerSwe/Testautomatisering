@@ -5,9 +5,11 @@ from selenium.webdriver.support.wait import WebDriverWait
 from helper_tests import simple_assert, boolean_assert
 
 driver = webdriver.Chrome()
-MAIN_URL = ('https://www.malmomusikaffar.com/')
+main_url = ('https://www.malmomusikaffar.com/')
+electric_guitars = "https://www.malmomusikaffar.com/stranginstrument/gitarr/elgitarrer"
 
-driver.get(MAIN_URL)
+
+driver.get(main_url)
 
 # SETUP & TEARDOWN
 @pytest.fixture
@@ -18,3 +20,8 @@ def load_driver():
     yield driver
 
     driver.quit()
+
+
+def test_1(load_driver):
+    driver.get(electric_guitars)
+    driver.find_element_by_xpath('//*[@id="amasty-shopby-product-list"]/div[2]/ol/li[39]/div/div/header/strong/a')

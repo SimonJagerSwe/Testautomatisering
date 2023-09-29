@@ -8,6 +8,7 @@ from helper_tests import simple_assert, boolean_assert
 driver = webdriver.Chrome()
 main_url = ('https://www.malmomusikaffar.com/')
 electric_guitars = ('https://www.malmomusikaffar.com/stranginstrument/gitarr/elgitarrer')
+cart = ('https://www.malmomusikaffar.com/checkout/cart/')
 
 
 # driver.get(main_url)
@@ -22,14 +23,14 @@ def load_driver():
 
     driver.quit()
 
-# Kontrollera att url:en stämmer
+# Test 1: Kontrollera att url:en stämmer
 def test_1(load_driver):
     driver = load_driver
     driver.get(main_url)
     boolean_assert("malmomusikaffar" in driver.current_url, f"Expected malmomusikaffar in url, got: {driver.current_url}")
 
 
-# Kontrollera att det går att lägga till Eastman T59/V Antique Red i kundkorg
+# Test 2: Kontrollera att det går att lägga till Eastman T59/V Antique Red i kundkorg
 def test_2(load_driver):
     driver = load_driver
 
@@ -40,20 +41,18 @@ def test_2(load_driver):
     find_guitar = driver.find_element(By.XPATH, '//*[@id="amasty-shopby-product-list"]/div[2]/ol/li[39]/div/div/header/a')
     driver.execute_script("arguments[0].click();", find_guitar)
 
-    # Lägg till i kundkorg
+    # Lägg till i kundkorg och vänta
     add_to_cart = driver.find_element(By.XPATH, '//*[@id="product-addtocart-button"]')
     driver.execute_script("arguments[0].click();", add_to_cart)
+    time.sleep(5)
 
     # Gå till kundkorg och kontrollera att rätt produkt ligger där
-    in_cart = driver.find_element(By.XPATH, '//*[@id="html-body"]/div[4]/header/div[2]/div[1]/a')
-    driver.execute_script("arguments[0].click();", in_cart)
-    goto_cart = driver.find_element(By.XPATH, '//*[@id="top-cart-btn-cart"]')
-    driver.execute_script("arguments[0].click();", goto_cart)
-    guitar_name = driver.find_element(By.XPATH, '//*[@id="shopping-cart-table"]/tbody[1]/tr/td[1]/div/strong/a')
-    boolean_assert("T59/V Antique Red" in guitar_name, f"Expected T59/V Antique Red in element, got: {guitar_name}")
+    driver.get(cart)
+    guitar_link = driver.find_element(By.LINK_TEXT, '<a href="https://www.malmomusikaffar.com/eastman-t59-v-antique-red-16950271">T59/V Antique Red</a>')
+    boolean_assert("T59/V Antique Red" in guitar_link, f"Expected T59/V Antique Red, got: {guitar_link}")
+    # T59/V Antique Red
 
-
-# Kontrollera att facebooklänken stämmer
+# Test 3: Kontrollera att facebooklänken stämmer
 def test_3(load_driver):
     driver = load_driver
     driver.get(main_url)

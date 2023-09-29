@@ -47,6 +47,11 @@ def test_2(load_driver):
     # Gå till kundkorg och kontrollera att rätt produkt ligger där
     in_cart = driver.find_element(By.XPATH, '//*[@id="html-body"]/div[4]/header/div[2]/div[1]/a')
     driver.execute_script("arguments[0].click();", in_cart)
+    goto_cart = driver.find_element(By.XPATH, '//*[@id="top-cart-btn-cart"]')
+    driver.execute_script("arguments[0].click();", goto_cart)
+    guitar_name = driver.find_element(By.XPATH, '//*[@id="shopping-cart-table"]/tbody[1]/tr/td[1]/div/strong/a')
+    boolean_assert("T59/V Antique Red" in guitar_name, f"Expected T59/V Antique Red in element, got: {guitar_name}")
+
 
 # Kontrollera att facebooklänken stämmer
 def test_3(load_driver):

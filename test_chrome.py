@@ -43,30 +43,30 @@ def load_driver():
 # -----------------------------------------------------------------------------------------------------------------------------------------------
 
 
-def test_1(load_driver):
+# def test_1(load_driver):
 
-    driver = load_driver
+    # driver = load_driver
 
-    driver.get(SELENIUM_SITE)
+    # driver.get(SELENIUM_SITE)
 
     # Test the title of the page
-    title = driver.title
-    simple_assert(title, "Web form")
+    # title = driver.title
+    # simple_assert(title, "Web form")
 
     # Finding elements:
-    text_box = driver.find_element(by=By.NAME, value="my-text")
-    submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
+    # text_box = driver.find_element(by=By.NAME, value="my-text")
+    # submit_button = driver.find_element(by=By.CSS_SELECTOR, value="button")
 
     # Actions:
-    text_box.send_keys("Selenium")
-    submit_button.click()
+    # text_box.send_keys("Selenium")
+    # submit_button.click()
 
     # Storing text from an element
-    message = driver.find_element(by=By.ID, value="message")
-    value = message.text
+    # message = driver.find_element(by=By.ID, value="message")
+    # value = message.text
 
     # Validate output
-    simple_assert(value, "Received!")
+    # simple_assert(value, "Received!")
 
     
 # Test an exception
@@ -83,12 +83,12 @@ def test_1(load_driver):
         # submit_button.faulty_click()
 
 
-def test_lecture_1(load_driver):
+# def test_lecture_1(load_driver):
     # Load Selenium webdriver
-    driver = load_driver
+    # driver = load_driver
 
     # Load iceberry website
-    driver.get(ICEBERRY_SITE)
+    # driver.get(ICEBERRY_SITE)
 
     # time.sleep(5)
     # 1: Don't

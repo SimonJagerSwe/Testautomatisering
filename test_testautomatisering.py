@@ -28,7 +28,14 @@ def test_1(load_driver):
     boolean_assert("malmomusikaffar" in driver.current_url, f"Expected malmomusikaffar in url, got: {driver.current_url}")
 
 
-def test_2(load driver):
+# Kontrollera att det går att lägga till en vara i favorit-listan
+def test_2(load_driver):
     driver = load_driver
     driver.get(electric_guitars)
+
+
+# Kontrollera att facebooklänken stämmer
+def test_3(load_driver):
+    driver = load_driver
+    driver.get(main_url)
     

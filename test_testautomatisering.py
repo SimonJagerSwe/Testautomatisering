@@ -48,12 +48,18 @@ def test_2(load_driver):
 
     # Gå till kundkorg och kontrollera att rätt produkt ligger där
     driver.get(cart)
-    guitar_link = driver.find_element(By.LINK_TEXT, '<a href="https://www.malmomusikaffar.com/eastman-t59-v-antique-red-16950271">T59/V Antique Red</a>')
+    guitar_link = driver.find_element(By.LINK_TEXT, 'https://www.malmomusikaffar.com/eastman-t59-v-antique-red-16950271')
     boolean_assert("T59/V Antique Red" in guitar_link, f"Expected T59/V Antique Red, got: {guitar_link}")
     # T59/V Antique Red
+
 
 # Test 3: Kontrollera att facebooklänken stämmer
 def test_3(load_driver):
     driver = load_driver
     driver.get(main_url)
+    facebook_link = driver.find_element(By.XPATH, '//*[@id="html-body"]/div[4]/footer/div[1]/div[2]/ul/li[1]/a')
+    driver.execute_script("arguments[0].click();", facebook_link)
+    driver.switch_to.window(driver.window_handles[1])
+    time.sleep(5)
+    boolean_assert("https://www.facebook.com/MalmoMusikaffar" in driver.current_url, f"Expected https://www.facebook.com/MalmoMusikaffar in url, got: {driver.current_url}")
     

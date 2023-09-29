@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 import pytest
+import time
 from selenium.webdriver.support.wait import WebDriverWait
 from helper_tests import simple_assert, boolean_assert
 
@@ -9,7 +10,7 @@ main_url = ('https://www.malmomusikaffar.com/')
 electric_guitars = ('https://www.malmomusikaffar.com/stranginstrument/gitarr/elgitarrer')
 
 
-driver.get(main_url)
+# driver.get(main_url)
 
 # SETUP & TEARDOWN
 @pytest.fixture
@@ -32,7 +33,9 @@ def test_1(load_driver):
 def test_2(load_driver):
     driver = load_driver
     driver.get(electric_guitars)
-
+    find_guitar = driver.find_element(By.XPATH, '//*[@id="amasty-shopby-product-list"]/div[2]/ol/li[39]/div/div/header/a')
+    # time.sleep(5)
+    driver.execute_script("arguments[0].click();", find_guitar)
 
 # Kontrollera att facebooklänken stämmer
 def test_3(load_driver):
